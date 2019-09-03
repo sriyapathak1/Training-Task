@@ -20,7 +20,7 @@ handleClick =(e) => {
         radioFootball:e.target.value,
         radioCricket:e.target.value
 
-    });
+    });     
 }
 
 render() {
@@ -34,7 +34,7 @@ render() {
                 {/* <SetState /> */}
                 <Form />
                 <NavBar />
-                
+
                 {/* <SelectField 
                 selectoption={selectoption}
                 handleClick={this.handleClick} />
