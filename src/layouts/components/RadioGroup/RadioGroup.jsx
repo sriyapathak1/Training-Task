@@ -1,40 +1,43 @@
-// import React, { Component } from 'react';
-// import { FootBall } from './../../config/constant';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-// class RadioGroup extends Component {
-//     constructor(){
-//         super();
-//         this.state ={
-//             radioName: ''
-//         };
-//         // this.handleOnClick = this.handleOnClick.bind(this);
-//     }
+const RadioGroup = (props) => {
+  const {
+    error, options, value, ...rest
+  } = props;
+  return (
+    <>
+      {
+        (options.length) ?
+          options.map(option => (
+            <div>
+              <label htmlFor={option.label}>
+                <input type="radio" value={option.value} name="disk" {...rest} key={option.value} />
 
-//     handleOnClick = (event) => {
-//         this.setState({
-//             radioName:event.target.value
-//         });
-//     }
-//     render() {
-//         const { radioName } =this.state;
-//         console.log('your radio btn is ', radioName)
-//         return (
-//             <div>
-//                 <label >
-                    
-//                    {FootBall.map(field => (
-//                        <div key={field.value}>
-//                         <input type="radio" value={field.value}
-//                         // checked={this.state.radioName}
-//                         onClick={this.handleOnClick}
-//                         />
-//                         {field.value}
-//                         </div>
-//                    ))}
-//                 </label>
-//             </div>
-//         )
-//     }
-// }
+                {option.value}
+              </label>
+            </div>
+          )
+          )
+      :
+       ''
+    }
+      {error ? <p style={{ color: 'red' }}>{error}</p> : ''}
+    </>
+  );
+};
 
-// export default RadioGroup;
+RadioGroup.propTypes = {
+  error: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.objectOf),
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+};
+
+RadioGroup.defaultProps = {
+  options: [],
+  value: '',
+  error: '',
+};
+
+export default RadioGroup;

@@ -1,54 +1,89 @@
-import React from 'react';
-import { CustomTextField, Form } from './../../layouts/components';
-import { NavBar } from './../../layouts/components';
-// import SetState from '../../components/TextField/setState';
+import React, { Component } from 'react';
+import { TextField } from '@material-ui/core';
+import { Options, Cricket, FootBall } from '../../config/constant';
+import RadioGroup from '../../layouts/components/RadioGroup/RadioGroup';
+import SelectField from '../../layouts/components/selectField/SelectField';
+import Form from '../../layouts/components/Form/Form';
 
-// const TextFieldDemo = () => {
-class TextFieldDemo extends React.Component {
-    constructor(){
-        super();
-        this.state={
-            selectoption:'',
-            radioFootball:'',
-            radioCricket:'',
-        }
-    }
+// const schema = yup.object().shape({
+//   name: yup.string().min(3).required(),
+//   sport: yup.string().required(),
+//   player: yup.string().required(),
+// });
 
-handleClick =(e) => {
+class InputDemo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      sport: '',
+      player: '',
+      Err: {
+        name: '',
+        sport: '',
+        player: '',
+      },
+      hasError: {
+        name: false,
+        sport: false,
+        player: false,
+      },
+      isTouched: {
+        name: false,
+        sport: false,
+        player: false,
+      },
+    };
+  }
+
+  onChangeHandler = field => (event) => {
+    const { isTouched } = this.state;
     this.setState({
-        selectoption:e.target.value,
-        radioFootball:e.target.value,
-        radioCricket:e.target.value
+      [field]: event.target.value,
+      isTouched: { ...isTouched, [field]: true },
+    });
+  }
 
-    });     
-}
+  
+  render() {
 
-render() {
-// const { selectoption, radioCricket, radioFootball } = this.state;
+    const {
+      sport, name
+    } = this.state;
 
-        return (
-            <div>
-                <CustomTextField textValue="Hello"
-                error="This is error"
-                 />
-                {/* <SetState /> */}
-                <Form />
-                <NavBar />
-
-                {/* <SelectField 
-                selectoption={selectoption}
-                handleClick={this.handleClick} />
-                <RadioGroup
-                 selectoption={selectoption}
-                 radioCricket={radioCricket}
-                 radioFootball={radioFootball}
-                 handleClick={this.handleClick}
-
-                /> */}
-               
-            </div>     
-        );
+    let result = 0;
+    if (sport === 'Cricket') {
+      result = Cricket;
+    } else if (sport === 'FootBall') {
+      result = FootBall;
     }
-}
+    return (
+      <div>
+        <div>
+          <Form />
+         <TextField onChange={this.onChangeHandler('name')} value={name} />
+          <h3>Select the game you play!</h3>
+          <SelectField
+             
+            options={Options}
+            value={sport}
+            onChange={this.onChangeHandler('sport')}
+          />
+        </div>
+        <div>
+          {
+            (result) ? (
+              <RadioGroup
+                options={result}
+                onChange={this.onChangeHandler('player')}
 
-export default TextFieldDemo;
+              />
+            )
+              : ''
+          }     
+        </div>
+      </div>
+    );
+  }
+}
+export default InputDemo;

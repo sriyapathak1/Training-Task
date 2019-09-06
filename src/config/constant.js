@@ -26,3 +26,12 @@ export const MenuList =
   { label: 'Trainee3', link: "/login3" },
   { label: 'Login', link: "/login" },
 ];
+const dialogBox = {
+    heading: 'Fill this Form',
+    saveBtn: 'Save',
+    cancleBtn: 'Cancle',        
+};
+
+export {
+  dialogBox,
+}

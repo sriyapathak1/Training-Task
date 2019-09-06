@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Style from './style';
 
 const CustomTextField = (props) => {
-    const { textValue, error, disable } = props;
+    const { textValue, error } = props;
     const errorStyle = error ?  Style.error : {} ; 
      return (
             <div>

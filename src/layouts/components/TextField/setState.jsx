@@ -5,12 +5,16 @@ class setState extends Component {
         super();
         this.state = {
             value:0,
+            text:'',
         }
     }
     handleChange = () => {
         this.setState({
             value:this.state.value+1
         })
+    }
+    shouldComponentUpdate(nextProps, nextState){
+        console.log("Should Component Update Method")
     }
     render() {
         // const { value } =this.state;

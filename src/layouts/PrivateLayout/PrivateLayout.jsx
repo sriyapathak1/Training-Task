@@ -1,13 +1,11 @@
 import React from 'react';
 
- const PrivateLayout = () => {
-     
+
+    const PrivateLayout = ({children, ...rest}) => {
         return (
-            <div>
-                
-            </div>
+          <div className="page page-login">
+            <div className="main">{children}</div>
+          </div>
         )
-    }
-
-
+      }
 export default PrivateLayout;
